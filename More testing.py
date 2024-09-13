@@ -1,35 +1,116 @@
-# 1. List or dict of all 52 cards
+cards = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+]
 
 h = "of Hearts"
 c = "of Clubs"
 d = "of Diamonds"
 s = "of Spades"
 
-class cards:
-    def __init__(self, value, type):
-        self.value = value
-        self.type = type
-
-    def __str__(self):
-        return f"{self.value} {self.type}"
-
-card = []
-
-card += [cards(value, type) for value, type in [
-    (1,h), (2,h), (3,h), (4,h), (5,h), (6,h), (7,h), (8,h), (9,h), (10,h), (11,h), (12,h), (13,h),
-    (1,c), (2,c), (3,c), (4,c), (5,c), (6,c), (7,c), (8,c), (9,c), (10,c), (11,c), (12,c), (13,c),
-    (1,d), (2,d), (3,d), (4,d), (5,d), (6,d), (7,d), (8,d), (9,d), (10,d), (11,d), (12,d), (13,d),
-    (1,s), (2,s), (3,s), (4,s), (5,s), (6,s), (7,s), (8,s), (9,s), (10,s), (11,s), (12,s), (13,s)
-]]
-
-for obj in card:
-    print(obj.value, obj.type, sep=' ')
-
-# 2. Random sorting of the cards (player should not be able to see the result)
-
 import random
-random.shuffle(card)
-print(card)
+random.shuffle(cards)
 
-# 3. Dividing the randomly sorted cards into 2 new groups/lists/dicts - 1 for the player and 1 for the program - 26 random cards each
+player_deck_A = (cards[0:26])
+program_deck_A = (cards[26:52])
+print(player_deck_A)
+print(len(player_deck_A))
+print(program_deck_A)
+print(len(program_deck_A))
 
+
+while listlength<len(player_deck_A) or listlength<len(program_deck_A):
+
+    input("Press 'Enter' to draw a card.")
+
+    print(f"You drew {player_deck_A[0]}.")
+    player_drawn_card = (player_deck_A[0])
+    print(f"The computer drew {program_deck_A[0]}.")
+    program_drawn_card = (program_deck_A[0])
+
+    if (player_drawn_card > program_drawn_card):
+        print("You drew the highest card. You win this round!")
+    elif (player_drawn_card < program_drawn_card):
+        print("You drew the lowest card. You lose this round.")
+    elif (player_drawn_card == program_drawn_card):
+        print("You both drew cards of equal value.")
+    else:
+        print("Something really weird must have happened for this to come up.")
+
+    input("Press 'Enter' to continue.")
+
+    if (player_drawn_card > program_drawn_card):
+        player_deck_B.insert(0, player_drawn_card)
+        player_deck_B.insert(0, program_drawn_card)
+        player_deck_A.pop(0)
+        program_deck_A.pop(0)
+        print("Both cards have been added to your winning deck.")
+    elif (player_drawn_card < program_drawn_card):
+        program_deck_B.insert(0, player_drawn_card)
+        program_deck_B.insert(0, program_drawn_card)
+        player_deck_A.pop(0)
+        program_deck_A.pop(0)
+        print("Both cards have been added to the programs winning deck.")
+    elif (player_drawn_card == program_drawn_card):
+        random.shuffle(player_deck_A)
+        random.shuffle(program_deck_A)
+        print("Both decks have been re-shuffled. Try again.")
+    else:
+        print("Something really weird must have happened for this to come up.")
+        exit()
+
+    print(f"There are {len(player_deck_A)} cards left in you deck.")
+    print(f"There are {len(program_deck_A)} cards left in the programs deck.")
+    print(f"There are {len(player_deck_B)} cards in your winning deck.")
+    print(f"There are {len(program_deck_B)} cards in the programs winning deck.") # these need to be added to if statements
+
+print("Your main deck is empty. You are now using your winning deck.")
+
+while listlength<len(player_deck_B) or listlength<len(program_deck_B):
+    
+    input("Press 'Enter' to draw a card.")
+
+    print(f"You drew {player_deck_B[0]}.")
+    player_drawn_card = (player_deck_B[0])
+    print(f"The computer drew {program_deck_B[0]}.")
+    program_drawn_card = (program_deck_B[0])
+
+    if (player_drawn_card > program_drawn_card):
+        print("You drew the highest card. You win this round!")
+    elif (player_drawn_card < program_drawn_card):
+        print("You drew the lowest card. You lose this round.")
+    elif (player_drawn_card == program_drawn_card):
+        print("You both drew cards of equal value.")
+    else:
+        print("Something really weird must have happened for this to come up.")
+
+    input("Press 'Enter' to continue.")
+
+    if (player_drawn_card > program_drawn_card):
+        player_deck_A.insert(0, player_drawn_card)
+        player_deck_A.insert(0, program_drawn_card)
+        player_deck_B.pop(0)
+        program_deck_B.pop(0)
+        print("Both cards have been added to your winning deck.")
+    elif (player_drawn_card < program_drawn_card):
+        program_deck_A.insert(0, player_drawn_card)
+        program_deck_A.insert(0, program_drawn_card)
+        player_deck_B.pop(0)
+        program_deck_B.pop(0)
+        print("Both cards have been added to the programs winning deck.")
+    elif (player_drawn_card == program_drawn_card):
+        random.shuffle(player_deck_B)
+        random.shuffle(program_deck_B)
+        print("Both decks have been re-shuffled. Try again.")
+    else:
+        print("Something really weird must have happened for this to come up.")
+        exit()
+
+    print(f"There are {len(player_deck_B)} cards left in you deck.")
+    print(f"There are {len(program_deck_B)} cards left in the programs deck.")
+    print(f"There are {len(player_deck_A)} cards in your winning deck.")
+    print(f"There are {len(program_deck_A)} cards in the programs winning deck.")
+
+# the program now stops when either the player or the computer runs out of cards. Not when they've actually won.
